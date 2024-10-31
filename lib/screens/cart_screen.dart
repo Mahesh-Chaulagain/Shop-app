@@ -91,7 +91,7 @@ class _OrderButtonState extends State<OrderButton> {
                 widget.cart.clear();
               },
         child: _isLoading
-            ? CircularProgressIndicator()
+            ? const CircularProgressIndicator()
             : const Text(
                 'ORDER NOW',
                 style: TextStyle(fontSize: 10),

@@ -37,12 +37,12 @@ class _OrdersScreenState extends State<OrdersScreen> {
         future: _ordersFuture,
         builder: (ctx, dataSnapshot) {
           if (dataSnapshot.connectionState == ConnectionState.waiting) {
-            return Center(
+            return const Center(
               child: CircularProgressIndicator(),
             );
           } else {
             if (dataSnapshot.error != null) {
-              return Center(child: Text('An error occurred'));
+              return const Center(child: Text('An error occurred'));
             } else {
               // Use Consumer to access the order data
               return Consumer<Orders>(
