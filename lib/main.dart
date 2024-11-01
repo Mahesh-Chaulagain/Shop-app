@@ -1,5 +1,6 @@
 import "package:flutter/material.dart";
 import "package:provider/provider.dart";
+import "package:shop_app/helpers/custom_route.dart";
 import "../screens/splash-screen.dart";
 import "./screens/edit_product_screen.dart";
 
@@ -47,10 +48,15 @@ class MyApp extends StatelessWidget {
         builder: (ctx, auth, _) => MaterialApp(
           title: 'MyShop',
           theme: ThemeData(
-            primaryColor: Colors.green,
-            primarySwatch: Colors.orange,
-            fontFamily: 'Lato',
-          ),
+              primaryColor: Colors.green,
+              primarySwatch: Colors.orange,
+              fontFamily: 'Lato',
+              pageTransitionsTheme: PageTransitionsTheme(
+                builders: {
+                  TargetPlatform.android: CustomPageTransitionBuilder(),
+                  TargetPlatform.iOS: CustomPageTransitionBuilder(),
+                },
+              )),
           home: auth.isAuth
               ? const ProductsOverviewScreen()
               : FutureBuilder(
@@ -58,7 +64,7 @@ class MyApp extends StatelessWidget {
                   builder: (ctx, authResultSnapshot) =>
                       authResultSnapshot.connectionState ==
                               ConnectionState.waiting
-                          ? SplashScreen()
+                          ? const SplashScreen()
                           : const AuthScreen(),
                 ),
           routes: {
